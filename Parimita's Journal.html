@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parimita's Personal Diary</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body align="middle">
+  <h1>Parimita's Personal Diary</h1>
+  
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date">
+  </div>
+  <div>
+    <label for="entry">Entry:</label>
+   <textarea
+                id="entry"
+                placeholder="What's on your mind today? ✏️💭"
+              ></textarea>
+  </div>
+<div class="image-slideshow">
+      <div class="image fade">
+      <img src="https://thumbs.dreamstime.com/z/green-cute-doodle-handdrawn-motivation-quote-facebook-post-251341759.jpg?w=768" alt="1 step at a time">
+      </div>        
+             
+      <div class="image fade">
+      <img src="https://iili.io/HWdlWDN.md.jpg" alt="Neon Sign">
+      </div>
+<div class="image fade">
+      <img src="https://thumbs.dreamstime.com/z/beige-cute-doodle-handdrawn-motivation-quote-instagram-post-251258884.jpg?w=768" alt="one step at a time, you'll get there">
+      </div>
+    </div>
+  <button onclick="saveEntry()" >Save Entry</button>
+  
+  <div id="diaryEntries"></div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<style>
+
+body {
+  font-family: 'Fantasy', Papyrus;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="date"], textarea {
+  width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ab4ba3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#diaryEntries {
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.date {
+  font-weight: bold;
+  color: #333;
+}
+
+.entry {
+  margin-top: 10px;
+  color: #555;
+}
+* {
+    box-sizing: border-box
+}
+.image-slideshow {
+  max-width: 200px;
+  position: relative;
+  margin: auto;
+}
+img {
+  width: 100%
+}
+.fade {
+  animation-name: fade;
+  animation-duration: 2s;
+}
+@keyframes fade {
+  from {opacity: .5}
+  to {opacity: 1}
+}
+</style>
+
+
+<script type="text/javascript">
+function saveEntry() {
+  var date = document.getElementById('date').value;
+  var entry = document.getElementById('entry').value;
+
+  
+  var card = document.createElement('div');
+  card.className = 'card';
+  
+  var dateElem = document.createElement('p');
+  dateElem.className = 'date';
+  dateElem.textContent = date;
+  
+  var entryElem = document.createElement('p');
+  entryElem.className = 'entry';
+  entryElem.textContent = entry;
+  
+  card.appendChild(dateElem);
+  card.appendChild(entryElem);
+  
+  document.getElementById('diaryEntries').appendChild(card);
+  
+  document.getElementById('date').value = '';
+  document.getElementById('entry').value = '';
+}
+let index = 0;
+displayImages();
+function displayImages() {
+  let i;
+  const images = document.getElementsByClassName("image");
+  for (i = 0; i < images.length; i++) {
+    images[i].style.display = "none";
+  }
+  index++;
+  if (index > images.length) {
+    index = 1;
+  }
+  images[index-1].style.display = "block";
+  setTimeout(displayImages, 2000); 
+}
+</script>
